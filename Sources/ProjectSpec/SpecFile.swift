@@ -97,7 +97,7 @@ public struct SpecFile {
     }
 
     func mergedDictionary(set mergedTargets: inout Set<String>) -> JSONDictionary {
-        let name = filePath.description
+        let name = filePath.absolute().description
 
         guard !mergedTargets.contains(name) else { return [:] }
         mergedTargets.insert(name)
@@ -116,7 +116,7 @@ public struct SpecFile {
 
         let jsonDictionary = Project.pathProperties.resolvingPaths(in: self.jsonDictionary, relativeTo: relativePath)
         return SpecFile(
-            filePath: filePath,
+            filePath: relativePath + filePath.lastComponent,
             jsonDictionary: jsonDictionary,
             relativePath: self.relativePath,
             subSpecs: subSpecs.map { $0.resolvingPaths(relativeTo: relativePath) }
