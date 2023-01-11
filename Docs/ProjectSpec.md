@@ -64,12 +64,13 @@ An include can be provided via a string (the path) or an object of the form:
 
 - [x] **path**: **String** - The path to the included file.
 - [ ] **relativePaths**: **Bool** - Dictates whether the included spec specifies paths relative to itself (the default) or the root spec file.
-
+- [ ] **enable**: **Bool** - Dictates whether the specified spec should be included or not. You can also specify it by environment variable.
 ```yaml
 include:
   - includedFile.yml
   - path: path/to/includedFile.yml
     relativePaths: false
+    enable: ${INCLUDE_ADDITIONAL_YAML}
 ```
 
 By default specs are merged additively. That is for every value:
@@ -729,7 +730,7 @@ This is used to override settings or run build scripts in specific targets
 
 ## Target Template
 
-This is a template that can be referenced from a normal target using the `templates` property. The properties of this template are the same as a [Target](#target)].
+This is a template that can be referenced from a normal target using the `templates` property. The properties of this template are the same as a [Target](#target).
 Any instances of `${target_name}` within each template will be replaced by the final target name which references the template.
 Any attributes defined within a targets `templateAttributes` will be used to replace any attribute references in the template using the syntax `${attribute_name}`.
 
@@ -803,6 +804,7 @@ The different actions share some properties:
 - [ ] **preActions**: **[[Execution Action](#execution-action)]** - Scripts that are run *before* the action
 - [ ] **postActions**: **[[Execution Action](#execution-action)]** - Scripts that are run *after* the action
 - [ ] **environmentVariables**: **[[Environment Variable](#environment-variable)]** or **[String:String]** - `run`, `test` and `profile` actions can define the environment variables. When passing a dictionary, every key-value entry maps to a corresponding variable that is enabled.
+- [ ] **enableGPUFrameCaptureMode**: **GPUFrameCaptureMode** - Property value set for `GPU Frame Capture`. Possible values are `autoEnabled`, `metal`, `openGL`, `disabled`. Default is `autoEnabled`.
 - [ ] **disableMainThreadChecker**: **Bool** - `run` and `test` actions can define a boolean that indicates that this scheme should disable the Main Thread Checker. This defaults to false
 - [ ] **stopOnEveryMainThreadCheckerIssue**: **Bool** - a boolean that indicates if this scheme should stop at every Main Thread Checker issue. This defaults to false
 - [ ] **language**: **String** - `run` and `test` actions can define a language that is used for Application Language

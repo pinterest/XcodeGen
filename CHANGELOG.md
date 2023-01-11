@@ -2,9 +2,36 @@
 
 ## Next Version
 
+## 2.33.0
+
+### Added
+
+- Added support for `enableGPUFrameCaptureMode` #1251 @bsudekum
+- Config setting presets can now also be loaded from the main bundle when bundling XcodeGenKit #1135 @SofteqDG
+- Added ability to generate multiple projects in one XcodeGen launch #1270 @skofgar
+- Use memoization during recursive SpecFiles creation. This provides a drastic performance boost with lots of recursive includes #1275 @ma-oli
+
+### Fixed
+
+- Fix scheme not being generated for aggregate targets #1250 @CraigSiemens
+- Fix recursive include path when relativePath is not set #1275 @ma-oli
+- Include projectRoot in include paths #1275 @ma-oli
+
+### Internal
+- Updated to Yams 5.0.1 #1297 @s2mr
+- Delete ignored `try` keyword #1298 @s2mr
+
+## 2.32.0
+
 ### Added
 
 - Add support for `mlmodelc` files #1236 @antonsergeev88
+- Add `enable` option for `include` #1242 @freddi-kit
+
+### Fixed
+
+- Fix checking environment variable in `include` #1242 @freddi-kit
+- Fix profile action for frameworks in Xcode 14 #1245 @SSheldon
 
 ## 2.31.0
 
